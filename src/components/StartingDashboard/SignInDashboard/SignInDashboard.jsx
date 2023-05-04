@@ -17,6 +17,7 @@ const SignInDashboard = () => {
 			.then(user => {
 				authCtx.logInHandler(user);
 				setCorrectDataUser(true);
+				console.log("test");
 			})
 
 			.catch(error => {
