@@ -1,12 +1,18 @@
-import { firebaseApp } from "./services/config/firebaseConfig";
+import { useContext } from "react";
+import { AuthContext } from "./context/auth-context";
+import StartingDashboard from "./components/StartingDashboard/StartingDashboard";
 
-function App() {
+const App = () => {
+	const authCtx = useContext(AuthContext);
+
+	if (!authCtx.checkIfUserLoggedIn) return <p>Ładowanie</p>;
+
 	return (
 		<>
-			<h1>smakosfera</h1>
-			{console.log(firebaseApp)}
+			<p>{authCtx.isLoggedIn ? "zalogowane" : "niezalogowane"}</p>
+			<StartingDashboard></StartingDashboard>
 		</>
 	);
-}
+};
 
 export default App;
