@@ -31,8 +31,8 @@ export const AuthContextProvider = props => {
 		getUserData().then(user => {
 			setIsLoggedIn(true);
 			setUserData(user);
-			setCheckIfUserLoggedIn(true);
 		});
+		setCheckIfUserLoggedIn(true);
 	}, []);
 
 	return (

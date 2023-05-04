@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "./context/auth-context";
 import StartingDashboard from "./components/StartingDashboard/StartingDashboard";
+import MainDashboard from "./components/MainDashboard/MainDashboard";
 
 const App = () => {
 	const authCtx = useContext(AuthContext);
@@ -9,8 +10,8 @@ const App = () => {
 
 	return (
 		<>
-			<p>{authCtx.isLoggedIn ? "zalogowane" : "niezalogowane"}</p>
-			<StartingDashboard></StartingDashboard>
+			{!authCtx.isLoggedIn && <StartingDashboard></StartingDashboard>}
+			{authCtx.isLoggedIn && <MainDashboard></MainDashboard>}
 		</>
 	);
 };

@@ -5,6 +5,7 @@ import { AuthContext } from "../../../context/auth-context";
 const LogInDashboard = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [correctDataUser, setCorrectDataUser] = useState(true);
 
 	const authCtx = useContext(AuthContext);
 
@@ -13,12 +14,12 @@ const LogInDashboard = () => {
 
 		logIn(email, password)
 			.then(user => {
+				setCorrectDataUser(true);
 				authCtx.logInHandler(user);
 			})
 
-			.catch(error => {
-				console.log("esia");
-				console.log(error);
+			.catch(() => {
+				setCorrectDataUser(false);
 			});
 	};
 
@@ -40,6 +41,7 @@ const LogInDashboard = () => {
 				/>
 				<input type="submit" value="Zaloguj się" onClick={submitHandler} />
 			</form>
+			{!correctDataUser && <p>Podaj poprawne dane do logowania</p>}
 		</div>
 	);
 };

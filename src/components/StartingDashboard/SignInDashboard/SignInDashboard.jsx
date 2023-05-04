@@ -21,7 +21,6 @@ const SignInDashboard = () => {
 
 			.catch(error => {
 				setCorrectDataUser(false);
-				console.log(error.message);
 
 				switch (error.message) {
 					case "Firebase: Error (auth/email-already-in-use).":
