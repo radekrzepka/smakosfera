@@ -1,25 +1,71 @@
-import { useContext, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import { logIn } from "../../../services/firebaseServices";
 import { AuthContext } from "../../../context/auth-context";
+import { validateEmail } from "../validateEmail";
+
+const emailReducer = (state, action) => {
+	switch (action.type) {
+		case "changeValue":
+			return {
+				value: action.value,
+				isValid: validateEmail(action.value),
+			};
+		case "wrongEmail":
+			return {
+				...state,
+				isValid: false,
+			};
+	}
+};
+
+const passwordReducer = (state, action) => {
+	switch (action.type) {
+		case "changeValue":
+			return {
+				value: action.value,
+				isValid: action.value.length >= 6,
+			};
+		case "wrongPassword":
+			return {
+				...state,
+				isValid: false,
+			};
+	}
+};
 
 const LogInDashboard = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [correctDataUser, setCorrectDataUser] = useState(true);
+	const [emailState, dispatchEmail] = useReducer(emailReducer, {
+		value: "",
+		isValid: false,
+	});
+
+	const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+		value: "",
+		isValid: false,
+	});
+
+	const [firstTimeClickedButton, setFirstTimeClickedButton] = useState(false);
 
 	const authCtx = useContext(AuthContext);
 
 	const submitHandler = event => {
 		event.preventDefault();
+		setFirstTimeClickedButton(true);
 
-		logIn(email, password)
+		logIn(emailState.value, passwordState.value)
 			.then(user => {
-				setCorrectDataUser(true);
 				authCtx.logInHandler(user);
 			})
 
-			.catch(() => {
-				setCorrectDataUser(false);
+			.catch(erorr => {
+				switch (erorr.message) {
+					case "Firebase: Error (auth/wrong-password).":
+						dispatchPassword({ type: "wrongPassword" });
+						break;
+					case "Firebase: Error (auth/user-not-found).":
+						dispatchEmail({ type: "wrongEmail" });
+						break;
+				}
 			});
 	};
 
@@ -31,17 +77,27 @@ const LogInDashboard = () => {
 				<input
 					type="text"
 					id="logInEmail"
-					onChange={event => setEmail(event.target.value)}
+					onChange={event =>
+						dispatchEmail({ type: "changeValue", value: event.target.value })
+					}
 				/>
 				<label htmlFor="logInPassword">Podaj hasło:</label>
 				<input
 					type="password"
 					id="logInPassword"
-					onChange={event => setPassword(event.target.value)}
+					onChange={event =>
+						dispatchPassword({ type: "changeValue", value: event.target.value })
+					}
 				/>
-				<input type="submit" value="Zaloguj się" onClick={submitHandler} />
+				<input
+					type="submit"
+					value="Zaloguj się"
+					onClick={submitHandler}
+					disabled={!(emailState.isValid && passwordState.isValid)}
+				/>
 			</form>
-			{!correctDataUser && <p>Podaj poprawne dane do logowania</p>}
+			{!(emailState.isValid && passwordState.isValid) &&
+				firstTimeClickedButton && <p>Podaj poprawne dane do logowania</p>}
 		</div>
 	);
 };

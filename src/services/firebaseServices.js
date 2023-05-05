@@ -50,11 +50,13 @@ export const logOut = async () => {
 };
 
 export const getUserData = async () => {
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		auth.onAuthStateChanged(user => {
 			if (user) {
 				const { uid, email } = user;
 				resolve({ uid: uid, email: email });
+			} else {
+				reject();
 			}
 		});
 	});

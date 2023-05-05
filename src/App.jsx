@@ -6,12 +6,15 @@ import MainDashboard from "./components/MainDashboard/MainDashboard";
 const App = () => {
 	const authCtx = useContext(AuthContext);
 
-	if (!authCtx.checkIfUserLoggedIn) return <p>Ładowanie</p>;
-
 	return (
 		<>
-			{!authCtx.isLoggedIn && <StartingDashboard></StartingDashboard>}
-			{authCtx.isLoggedIn && <MainDashboard></MainDashboard>}
+			{!authCtx.userData && <p>Ładowanie</p>}
+			{authCtx.userData && authCtx.isLoggedIn && (
+				<MainDashboard></MainDashboard>
+			)}
+			{authCtx.userData && !authCtx.isLoggedIn && (
+				<StartingDashboard></StartingDashboard>
+			)}
 		</>
 	);
 };

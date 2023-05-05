@@ -2,20 +2,15 @@ import React, { useEffect, useState } from "react";
 import { getUserData } from "../services/firebaseServices";
 
 export const AuthContext = React.createContext({
-	checkIfUserLoggedIn: false,
 	isLoggedIn: false,
+	userData: undefined,
 	logInHandler: () => {},
 	logOutHandler: () => {},
-	userData: {
-		email: "",
-		uid: "",
-	},
 });
 
 export const AuthContextProvider = props => {
-	const [checkIfUserLoggedIn, setCheckIfUserLoggedIn] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [userData, setUserData] = useState({});
+	const [userData, setUserData] = useState(undefined);
 
 	const logInHandler = user => {
 		setIsLoggedIn(true);
@@ -28,17 +23,20 @@ export const AuthContextProvider = props => {
 	};
 
 	useEffect(() => {
-		getUserData().then(user => {
-			setIsLoggedIn(true);
-			setUserData(user);
-		});
-		setCheckIfUserLoggedIn(true);
+		getUserData()
+			.then(user => {
+				setIsLoggedIn(true);
+				setUserData(user);
+			})
+			.catch(() => {
+				setIsLoggedIn(false);
+				setUserData({});
+			});
 	}, []);
 
 	return (
 		<AuthContext.Provider
 			value={{
-				checkIfUserLoggedIn: checkIfUserLoggedIn,
 				isLoggedIn: isLoggedIn,
 				logInHandler: logInHandler,
 				logOutHandler: logOutHandler,
