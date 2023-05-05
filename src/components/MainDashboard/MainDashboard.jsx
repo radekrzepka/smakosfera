@@ -1,16 +1,35 @@
-import { useContext } from "react";
-import { logOut } from "../../services/firebaseServices";
-import { AuthContext } from "../../context/auth-context";
+import { useEffect, useState } from "react";
+import {
+	checkIfUsernameInDb,
+	getAllRecipesTags,
+} from "../../services/firebaseServices";
+import SidePanel from "./SidePanel/SidePanel";
+import RecipesPanel from "./RecipesPanel/RecipesPanel";
 
 const MainDashboard = () => {
-	const authCtx = useContext(AuthContext);
+	const [selectedSite, useSelectedSite] = useState("");
 
-	const logOutHandler = () => {
-		logOut();
-		authCtx.logOutHandler();
-	};
+	useEffect(() => {
+		checkIfUsernameInDb("traphone").then(data => {
+			console.log(data);
+		});
+		getAllRecipesTags().then(data => {
+			console.log(data);
+		});
+	}, []);
 
-	return <button onClick={logOutHandler}>Wyloguj się</button>;
+	return (
+		<div>
+			<SidePanel
+				selectedSite={selectedSite}
+				useSelectedSite={useSelectedSite}
+			></SidePanel>
+			<RecipesPanel
+				selectedSite={selectedSite}
+				useSelectedSite={useSelectedSite}
+			></RecipesPanel>
+		</div>
+	);
 };
 
 export default MainDashboard;

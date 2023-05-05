@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserData } from "../services/firebaseServices";
+import { getUserData, logOut } from "../services/firebaseServices";
 
 export const AuthContext = React.createContext({
 	isLoggedIn: false,
@@ -18,6 +18,7 @@ export const AuthContextProvider = props => {
 	};
 
 	const logOutHandler = () => {
+		logOut();
 		setIsLoggedIn(false);
 		setUserData({});
 	};
