@@ -1,5 +1,5 @@
 import { useContext, useReducer, useState } from "react";
-import { logIn } from "../../../services/firebaseServices";
+import { logIn } from "../../../services/authServices";
 import { AuthContext } from "../../../context/auth-context";
 import { validateEmail } from "../validateEmail";
 

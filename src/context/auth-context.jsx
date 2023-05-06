@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserData, logOut } from "../services/firebaseServices";
+import { getUserData, logOut } from "../services/authServices";
 
 export const AuthContext = React.createContext({
 	isLoggedIn: false,
