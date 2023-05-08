@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SidePanel from "./SidePanel/SidePanel";
 import RecipesPanel from "./RecipesPanel/RecipesPanel";
 
 const MainDashboard = () => {
-	const [selectedSite, useSelectedSite] = useState("");
-
-	useEffect(() => {}, []);
+	const [selectedSite, setSelectedSite] = useState("home");
 
 	return (
-		<div>
+		<main>
 			<SidePanel
 				selectedSite={selectedSite}
-				useSelectedSite={useSelectedSite}
+				setSelectedSite={setSelectedSite}
 			></SidePanel>
 			<RecipesPanel
 				selectedSite={selectedSite}
-				useSelectedSite={useSelectedSite}
+				setSelectedSite={setSelectedSite}
 			></RecipesPanel>
-		</div>
+		</main>
 	);
 };
 

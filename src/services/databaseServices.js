@@ -1,9 +1,48 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+import {
+	getFirestore,
+	getDocs,
+	collection,
+	getDoc,
+	doc,
+} from "firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+export const checkIfUserHasUserName = async userId => {
+	const usersSnap = await getDocs(collection(db, "users"));
+
+	return new Promise((resolve, reject) => {
+		if (usersSnap.empty) reject("No data");
+
+		usersSnap.forEach(doc => {
+			const name = doc.data().userName;
+			const id = doc.id;
+			if (userId === id) {
+				if (name !== "") resolve(true);
+				else resolve(false);
+			}
+		});
+	});
+};
+
+export const getUserUserNameByGivenId = async userId => {
+	const usersSnap = await getDocs(collection(db, "users"));
+
+	return new Promise((resolve, reject) => {
+		if (usersSnap.empty) reject("No data");
+
+		usersSnap.forEach(doc => {
+			const name = doc.data().userName;
+			const id = doc.id;
+			if (userId === id) {
+				resolve(name);
+			}
+		});
+	});
+};
 
 export const checkIfUsernameInDb = async username => {
 	const usersSnap = await getDocs(collection(db, "users"));
@@ -32,7 +71,8 @@ export const getAllRecipesTags = async () => {
 			const tagName = doc.data().name;
 			const id = doc.id;
 			tags.push({
-				[id]: tagName,
+				id: id,
+				tagName: tagName,
 			});
 		});
 		resolve(tags);
@@ -61,10 +101,11 @@ export const getAllRecipes = async () => {
 		const tags = [];
 
 		recipesSnap.forEach(doc => {
-			const recipes = doc.data();
+			const recipe = doc.data();
 			const id = doc.id;
 			tags.push({
-				[id]: recipes,
+				id: id,
+				...recipe,
 			});
 		});
 		resolve(tags);
@@ -79,9 +120,36 @@ export const getAllUserRecpies = async userId => {
 		const userRecipes = [];
 
 		recipesSnap.forEach(doc => {
-			const recipes = doc.data();
-			if (userId === recipes.author) userRecipes.push(recipes);
+			const recipe = doc.data();
+			const id = doc.id;
+			if (userId === recipe.author)
+				userRecipes.push({
+					id: id,
+					...recipe,
+				});
 		});
 		resolve(userRecipes);
+	});
+};
+
+export const getAllUserFavoriteRecpies = async userId => {
+	const userSnap = await getDoc(doc(db, "users", userId));
+	const recipesSnap = await getDocs(collection(db, "recipes"));
+	const favoriteRecipesId = userSnap.data().favoriteRecipes;
+
+	return new Promise((resolve, reject) => {
+		if (recipesSnap.empty) reject("No data");
+		const userFavoriteRecipes = [];
+
+		recipesSnap.forEach(doc => {
+			const recipe = doc.data();
+			const recipeId = doc.id;
+			if (favoriteRecipesId.includes(recipeId))
+				userFavoriteRecipes.push({
+					id: recipeId,
+					...recipe,
+				});
+		});
+		resolve(userFavoriteRecipes);
 	});
 };

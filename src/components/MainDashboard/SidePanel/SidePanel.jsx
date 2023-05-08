@@ -4,10 +4,13 @@ const SidePanel = props => {
 	return (
 		<div>
 			<div>smakosfera</div>
-			<div>dom</div>
+			<div onClick={() => props.setSelectedSite("home")}>dom</div>
 			<div>szukaj</div>
 			<div>dodaj przepis</div>
-			<div>ulubione</div>
+			<div onClick={() => props.setSelectedSite("myRecipes")}>
+				moje przepisy
+			</div>
+			<div onClick={() => props.setSelectedSite("favorite")}>ulubione</div>
 			<LogOutButton></LogOutButton>
 		</div>
 	);
