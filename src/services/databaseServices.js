@@ -11,24 +11,7 @@ import firebaseConfig from "./firebaseConfig";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const checkIfUserHasUserName = async userId => {
-	const usersSnap = await getDocs(collection(db, "users"));
-
-	return new Promise((resolve, reject) => {
-		if (usersSnap.empty) reject("No data");
-
-		usersSnap.forEach(doc => {
-			const name = doc.data().userName;
-			const id = doc.id;
-			if (userId === id) {
-				if (name !== "") resolve(true);
-				else resolve(false);
-			}
-		});
-	});
-};
-
-export const getUserUserNameByGivenId = async userId => {
+export const getUserUsernameByGivenId = async userId => {
 	const usersSnap = await getDocs(collection(db, "users"));
 
 	return new Promise((resolve, reject) => {
@@ -41,41 +24,6 @@ export const getUserUserNameByGivenId = async userId => {
 				resolve(name);
 			}
 		});
-	});
-};
-
-export const checkIfUsernameInDb = async username => {
-	const usersSnap = await getDocs(collection(db, "users"));
-
-	return new Promise((resolve, reject) => {
-		if (usersSnap.empty) reject("No data");
-
-		usersSnap.forEach(doc => {
-			const name = doc.data().userName;
-			if (username === name) {
-				resolve(true);
-			}
-		});
-		resolve(false);
-	});
-};
-
-export const getAllRecipesTags = async () => {
-	const tagsSnap = await getDocs(collection(db, "recipesTags"));
-
-	return new Promise((resolve, reject) => {
-		if (tagsSnap.empty) reject("No data");
-		const tags = [];
-
-		tagsSnap.forEach(doc => {
-			const tagName = doc.data().name;
-			const id = doc.id;
-			tags.push({
-				id: id,
-				tagName: tagName,
-			});
-		});
-		resolve(tags);
 	});
 };
 
@@ -103,12 +51,18 @@ export const getAllRecipes = async () => {
 		recipesSnap.forEach(doc => {
 			const recipe = doc.data();
 			const id = doc.id;
-			recipes.push({
+
+			const recipeObject = {
 				id: id,
 				...recipe,
+			};
+
+			getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
+				recipeObject.tags = tagsArr;
 			});
+
+			recipes.push(recipeObject);
 		});
-		console.log(recipes);
 		resolve(recipes);
 	});
 };
@@ -123,12 +77,21 @@ export const getAllUserRecpies = async userId => {
 		recipesSnap.forEach(doc => {
 			const recipe = doc.data();
 			const id = doc.id;
-			if (userId === recipe.author)
-				userRecipes.push({
+
+			if (userId === recipe.author) {
+				const recipeObject = {
 					id: id,
 					...recipe,
+				};
+
+				getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
+					recipeObject.tags = tagsArr;
 				});
+
+				userRecipes.push(recipeObject);
+			}
 		});
+
 		resolve(userRecipes);
 	});
 };
@@ -145,12 +108,31 @@ export const getAllUserFavoriteRecpies = async userId => {
 		recipesSnap.forEach(doc => {
 			const recipe = doc.data();
 			const recipeId = doc.id;
-			if (favoriteRecipesId.includes(recipeId))
-				userFavoriteRecipes.push({
+			if (favoriteRecipesId.includes(recipeId)) {
+				const recipeObject = {
 					id: recipeId,
 					...recipe,
+				};
+
+				getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
+					recipeObject.tags = tagsArr;
 				});
+
+				userFavoriteRecipes.push(recipeObject);
+			}
 		});
 		resolve(userFavoriteRecipes);
 	});
+};
+
+export const getTagsNameArrayFromTagsIdArray = async tagsIdArray => {
+	return Promise.all(
+		tagsIdArray.map(async tag => {
+			const tagName = await getTagNameByGivenId(tag);
+			return {
+				tagName: tagName,
+				tagId: tag,
+			};
+		})
+	);
 };

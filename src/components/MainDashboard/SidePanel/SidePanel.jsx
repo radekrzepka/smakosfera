@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import LogOutButton from "./LogOutButton/LogOutButton";
 import { AuthContext } from "../../../context/auth-context";
-import { getUserUserNameByGivenId } from "../../../services/databaseServices";
+import { getUserUsernameByGivenId } from "../../../services/databaseServices";
 
 const SidePanel = props => {
 	const [userName, setUserName] = useState("");
@@ -9,7 +9,7 @@ const SidePanel = props => {
 	const authCtx = useContext(AuthContext);
 
 	useEffect(() => {
-		getUserUserNameByGivenId(authCtx.userData.uid).then(data => {
+		getUserUsernameByGivenId(authCtx.userData.uid).then(data => {
 			setUserName(data);
 			setIsLoaded(true);
 		});
