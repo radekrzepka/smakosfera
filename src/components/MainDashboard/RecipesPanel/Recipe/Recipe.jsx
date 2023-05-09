@@ -31,16 +31,18 @@ const Recipe = props => {
 		setTagsList(tags);
 	}, []);
 
-	return (
-		<div className="border-4">
-			<p>{props.recipe.name}</p>
-			<AddDate date={props.recipe.addDate.seconds}></AddDate>
-			<p>{authorName}</p>
-			<TagsList list={tagsList}></TagsList>
-			<IngredientsList list={props.recipe.ingredients}></IngredientsList>
-			<StepsList list={props.recipe.steps}></StepsList>
-		</div>
-	);
+	if (tagsList.length !== 0) {
+		return (
+			<div className="border-4">
+				<p>{props.recipe.name}</p>
+				<AddDate date={props.recipe.addDate.seconds}></AddDate>
+				<p>{authorName}</p>
+				<TagsList list={tagsList}></TagsList>
+				<IngredientsList list={props.recipe.ingredients}></IngredientsList>
+				<StepsList list={props.recipe.steps}></StepsList>
+			</div>
+		);
+	}
 };
 
 export default Recipe;

@@ -70,35 +70,32 @@ const LogInDashboard = () => {
 	};
 
 	return (
-		<div>
-			<h1>Zaloguj się</h1>
-			<form>
-				<label htmlFor="logInEmail">Podaj e-mail:</label>
-				<input
-					type="text"
-					id="logInEmail"
-					onChange={event =>
-						dispatchEmail({ type: "changeValue", value: event.target.value })
-					}
-				/>
-				<label htmlFor="logInPassword">Podaj hasło:</label>
-				<input
-					type="password"
-					id="logInPassword"
-					onChange={event =>
-						dispatchPassword({ type: "changeValue", value: event.target.value })
-					}
-				/>
-				<input
-					type="submit"
-					value="Zaloguj się"
-					onClick={submitHandler}
-					disabled={!(emailState.isValid && passwordState.isValid)}
-				/>
-			</form>
+		<form>
+			<label htmlFor="logInEmail">Podaj e-mail:</label>
+			<input
+				type="text"
+				id="logInEmail"
+				onChange={event =>
+					dispatchEmail({ type: "changeValue", value: event.target.value })
+				}
+			/>
+			<label htmlFor="logInPassword">Podaj hasło:</label>
+			<input
+				type="password"
+				id="logInPassword"
+				onChange={event =>
+					dispatchPassword({ type: "changeValue", value: event.target.value })
+				}
+			/>
+			<input
+				type="submit"
+				value="Zaloguj się"
+				onClick={submitHandler}
+				disabled={!(emailState.isValid && passwordState.isValid)}
+			/>
 			{!(emailState.isValid && passwordState.isValid) &&
 				firstTimeClickedButton && <p>Podaj poprawne dane do logowania</p>}
-		</div>
+		</form>
 	);
 };
 

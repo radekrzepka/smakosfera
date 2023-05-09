@@ -29,11 +29,11 @@ const RecipesPanel = props => {
 		}
 	}, [props.selectedSite]);
 
-	const recipeList = recipes.map(recipe => (
+	const recipesList = recipes.map(recipe => (
 		<Recipe key={recipe.id} recipe={recipe}></Recipe>
 	));
 
-	return <div>{recipeList}</div>;
+	return <div>{recipesList}</div>;
 };
 
 export default RecipesPanel;

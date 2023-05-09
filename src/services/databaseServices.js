@@ -98,17 +98,18 @@ export const getAllRecipes = async () => {
 
 	return new Promise((resolve, reject) => {
 		if (recipesSnap.empty) reject("No data");
-		const tags = [];
+		const recipes = [];
 
 		recipesSnap.forEach(doc => {
 			const recipe = doc.data();
 			const id = doc.id;
-			tags.push({
+			recipes.push({
 				id: id,
 				...recipe,
 			});
 		});
-		resolve(tags);
+		console.log(recipes);
+		resolve(recipes);
 	});
 };
 
