@@ -5,7 +5,7 @@ import LoadingScreen from "../../LoadingScreen/LoadingScreen";
 import { RecipesContext } from "../../../context/recipes-context";
 
 const RecipesPanel = props => {
-	const [recipes, setRecipes] = useState([]);
+	const [recipes, setRecipes] = useState(undefined);
 	const authCtx = useContext(AuthContext);
 	const recipesCtx = useContext(RecipesContext);
 
@@ -31,7 +31,7 @@ const RecipesPanel = props => {
 		}
 	}, [props.selectedSite, recipesCtx.allRecipes]);
 
-	if (recipes.length !== 0) {
+	if (recipes !== undefined) {
 		const recipesList = recipes.map(recipe => (
 			<Recipe key={recipe.id} recipe={recipe}></Recipe>
 		));

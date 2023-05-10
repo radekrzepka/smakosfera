@@ -47,6 +47,8 @@ const SignInDashboard = () => {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [firstTimeClickedButton, setFirstTimeClickedButton] = useState(false);
 
+	const isDisabled = !(emailState.isValid && passwordState.isValid);
+
 	const authCtx = useContext(AuthContext);
 
 	const submitHandler = event => {
@@ -61,7 +63,7 @@ const SignInDashboard = () => {
 			.catch(error => {
 				switch (error.message) {
 					case "Firebase: Error (auth/email-already-in-use).":
-						setErrorMessage("Na podany mail został już stworzone konto");
+						setErrorMessage("Na podany mail zostało już stworzone konto");
 						dispatchEmail({ type: "wrongEmail" });
 						break;
 
@@ -79,35 +81,44 @@ const SignInDashboard = () => {
 	};
 
 	return (
-		<div>
-			<h1>Zarejestruj się</h1>
-			<form>
+		<form className="text-emerald-5 col-span-2 row-start-2 m-5 mx-12 h-max rounded-xl bg-[#2A6F2B] p-3 text-emerald-100 md:col-start-2 md:ml-0">
+			<p className="mb-3 text-2xl">Dołącz do smakosfery</p>
+			<div className="w-full">
 				<label htmlFor="signInEmail">Podaj e-mail:</label>
 				<input
+					className="mb-3 w-full rounded bg-emerald-50 text-black"
 					type="text"
 					id="signInEmail"
 					onChange={event =>
 						dispatchEmail({ type: "changeValue", value: event.target.value })
 					}
 				/>
-				<label htmlFor="signInPassword">Podaj hasło:</label>
+			</div>
+			<div>
+				<label htmlFor="signInPassword">Podaj hasło (minimum 6 znaków):</label>
 				<input
+					className="w-full rounded bg-emerald-50 text-black"
 					type="password"
 					id="signInPassword"
 					onChange={event =>
 						dispatchPassword({ type: "changeValue", value: event.target.value })
 					}
 				/>
-				<input
-					type="submit"
-					value="Zarejestruj się"
-					onClick={submitHandler}
-					disabled={!(emailState.isValid && passwordState.isValid)}
-				/>
-			</form>
-			{!(emailState.isValid && passwordState.isValid) &&
-				firstTimeClickedButton && <p>{errorMessage}</p>}
-		</div>
+			</div>
+			<button
+				type="button"
+				className={`mt-5 rounded border border-emerald-900 p-3 ${
+					isDisabled
+						? "border-[#afc2ab] bg-[#afc2ab] text-black"
+						: "border-emerald-900 bg-emerald-900 text-emerald-50"
+				}`}
+				onClick={submitHandler}
+				disabled={isDisabled}
+			>
+				Zarejestruj się
+			</button>
+			{isDisabled && firstTimeClickedButton && <p>{errorMessage}</p>}
+		</form>
 	);
 };
 

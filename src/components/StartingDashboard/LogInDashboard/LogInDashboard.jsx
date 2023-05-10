@@ -70,31 +70,50 @@ const LogInDashboard = () => {
 	};
 
 	return (
-		<form>
-			<label htmlFor="logInEmail">Podaj e-mail:</label>
-			<input
-				type="text"
-				id="logInEmail"
-				onChange={event =>
-					dispatchEmail({ type: "changeValue", value: event.target.value })
-				}
-			/>
-			<label htmlFor="logInPassword">Podaj hasło:</label>
-			<input
-				type="password"
-				id="logInPassword"
-				onChange={event =>
-					dispatchPassword({ type: "changeValue", value: event.target.value })
-				}
-			/>
-			<input
-				type="submit"
-				value="Zaloguj się"
-				onClick={submitHandler}
-				disabled={!(emailState.isValid && passwordState.isValid)}
-			/>
-			{!(emailState.isValid && passwordState.isValid) &&
-				firstTimeClickedButton && <p>Podaj poprawne dane do logowania</p>}
+		<form className="col-span-2 row-span-1 mx-12 mb-4 flex h-max flex-col items-center justify-evenly rounded-b-lg bg-emerald-50 p-2 md:flex-row">
+			<h1 className="font-JetBrainsMono text-2xl font-bold text-emerald-900">
+				Smakosfera
+			</h1>
+			<div className="flex flex-col items-center justify-center md:flex-row md:items-center xl:items-baseline xl:justify-around">
+				<div className="mx-1 mb-3 flex items-center justify-center md:mx-5 md:mb-0 md:grid md:place-items-center xl:flex">
+					<label htmlFor="logInEmail">Podaj e-mail:</label>
+					<input
+						className="ml-2 max-w-full rounded border border-emerald-900 bg-emerald-50 p-1 xl:ml-2"
+						type="text"
+						id="logInEmail"
+						onChange={event =>
+							dispatchEmail({ type: "changeValue", value: event.target.value })
+						}
+					/>
+				</div>
+				<div className="mx-1 mb-3 flex items-center justify-center md:mx-5 md:mb-0 md:grid md:place-items-center xl:flex">
+					<label htmlFor="logInPassword">Podaj hasło:</label>
+					<input
+						className="ml-2 rounded border border-emerald-900 bg-emerald-50 p-1 xl:ml-2"
+						type="password"
+						id="logInPassword"
+						onChange={event =>
+							dispatchPassword({
+								type: "changeValue",
+								value: event.target.value,
+							})
+						}
+					/>
+				</div>
+				<button
+					className="w-fit rounded border border-emerald-900 bg-emerald-900 px-6 py-3 text-emerald-50 xl:px-8 xl:py-3"
+					type="button"
+					onClick={submitHandler}
+				>
+					Zaloguj się
+				</button>
+				{!(emailState.isValid && passwordState.isValid) &&
+					firstTimeClickedButton && (
+						<p className="text-xs md:absolute md:top-3/4">
+							Podaj poprawne dane do logowania
+						</p>
+					)}
+			</div>
 		</form>
 	);
 };
