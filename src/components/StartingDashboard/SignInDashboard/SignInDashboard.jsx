@@ -81,7 +81,7 @@ const SignInDashboard = () => {
 	};
 
 	return (
-		<form className="text-emerald-5 col-span-2 row-start-2 m-5 mx-12 h-max rounded-xl bg-[#2A6F2B] p-3 text-emerald-100 md:col-start-2 md:ml-0">
+		<form className="text-emerald-5 col-span-2 row-start-2 m-5 mx-6 h-max rounded-xl bg-[#2A6F2B] p-3 text-emerald-100 md:col-start-2 md:ml-0 lg:mr-14">
 			<p className="mb-3 text-2xl">Dołącz do smakosfery</p>
 			<div className="w-full">
 				<label htmlFor="signInEmail">Podaj e-mail:</label>

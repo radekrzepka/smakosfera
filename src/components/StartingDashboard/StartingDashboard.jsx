@@ -8,7 +8,7 @@ const StartingDashboard = () => {
 		<main className="grid grid-cols-2 grid-rows-[auto_auto] bg-emerald-900 font-Comme md:grid-cols-2 md:grid-rows-[auto_auto]">
 			<LogInDashboard></LogInDashboard>
 			<SignInDashboard></SignInDashboard>
-			<div className="col-span-2 my-5 ml-14 md:col-span-1 md:row-start-2">
+			<div className="col-span-2 my-5 ml-6 md:col-span-1 md:row-start-2 lg:ml-16">
 				<h1 className="mb-3 text-5xl text-emerald-50">Witaj w smakosferze</h1>
 				<h2 className="mb-3 text-xl text-emerald-50">
 					Twojej wirtualnej książce z przepisami
@@ -19,7 +19,7 @@ const StartingDashboard = () => {
 					className="w-3/4"
 				/>
 			</div>
-			<div className="col-span-2 ml-14 mr-12 h-max text-emerald-50 md:row-span-1 md:row-start-3">
+			<div className="col-span-2 ml-6 mr-6 h-max text-emerald-50 md:row-span-1 md:row-start-3 lg:mx-16">
 				<p>
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis
 					mollitia veniam voluptatum rerum, facere minus doloremque dolores
