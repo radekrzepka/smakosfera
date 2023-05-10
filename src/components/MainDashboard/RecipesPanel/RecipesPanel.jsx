@@ -1,42 +1,35 @@
 import { useContext, useEffect, useState } from "react";
-import {
-	getAllRecipes,
-	getAllUserFavoriteRecpies,
-	getAllUserRecpies,
-} from "../../../services/databaseServices";
 import Recipe from "./Recipe/Recipe";
 import { AuthContext } from "../../../context/auth-context";
 import LoadingScreen from "../../LoadingScreen/LoadingScreen";
+import { RecipesContext } from "../../../context/recipes-context";
 
 const RecipesPanel = props => {
 	const [recipes, setRecipes] = useState([]);
 	const authCtx = useContext(AuthContext);
+	const recipesCtx = useContext(RecipesContext);
 
 	useEffect(() => {
-		setRecipes([]);
+		const userRecipes = recipesCtx.allRecipes.filter(
+			recipe => recipe.author === authCtx.userData.uid
+		);
+		const userFavoriteRecipes = recipesCtx.allRecipes.filter(recipe =>
+			recipe.usersFavorites.includes(authCtx.userData.uid)
+		);
 		switch (props.selectedSite) {
 			case "home":
-				getAllRecipes().then(data => {
-					setRecipes(data);
-				});
+				setRecipes(recipesCtx.allRecipes);
 				break;
 			case "search":
 				break;
 			case "myRecipes":
-				getAllRecipes().then(data => {
-					setRecipes(data);
-				});
-				getAllUserRecpies(authCtx.userData.uid).then(data => {
-					setRecipes(data);
-				});
+				setRecipes(userRecipes);
 				break;
 			case "favorite":
-				getAllUserFavoriteRecpies(authCtx.userData.uid).then(data => {
-					setRecipes(data);
-				});
+				setRecipes(userFavoriteRecipes);
 				break;
 		}
-	}, [props.selectedSite, authCtx.userData.uid]);
+	}, [props.selectedSite, recipesCtx.allRecipes]);
 
 	if (recipes.length !== 0) {
 		const recipesList = recipes.map(recipe => (

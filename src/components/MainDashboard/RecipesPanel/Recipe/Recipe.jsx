@@ -15,7 +15,6 @@ const Recipe = props => {
 	}, [props.recipe.author]);
 
 	if (authorName !== undefined) {
-		console.log(props.recipe.tags[0]);
 		return (
 			<div className="border-4">
 				<p>{props.recipe.name}</p>

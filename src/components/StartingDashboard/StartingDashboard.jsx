@@ -6,6 +6,10 @@ const StartingDashboard = () => {
 		<main>
 			<LogInDashboard></LogInDashboard>
 			<SignInDashboard></SignInDashboard>
+			<div>
+				<p>Witaj w smakosferze</p>
+				<p>Twojej wirtualne książce z przepisami</p>
+			</div>
 		</main>
 	);
 };

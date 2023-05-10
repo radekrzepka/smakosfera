@@ -20,12 +20,12 @@ const SidePanel = props => {
 			<div>
 				<p>Witaj {userName} w smakosfera</p>
 				<div onClick={() => props.setSelectedSite("home")}>dom</div>
-				<div>szukaj</div>
-				<div>dodaj przepis</div>
 				<div onClick={() => props.setSelectedSite("myRecipes")}>
 					moje przepisy
 				</div>
 				<div onClick={() => props.setSelectedSite("favorite")}>ulubione</div>
+				<div>dodaj przepis</div>
+				<div>szukaj</div>
 				<LogOutButton></LogOutButton>
 			</div>
 		);

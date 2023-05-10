@@ -1,11 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-	getFirestore,
-	getDocs,
-	collection,
-	getDoc,
-	doc,
-} from "firebase/firestore";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
 
 const app = initializeApp(firebaseConfig);
@@ -64,64 +58,6 @@ export const getAllRecipes = async () => {
 			recipes.push(recipeObject);
 		});
 		resolve(recipes);
-	});
-};
-
-export const getAllUserRecpies = async userId => {
-	const recipesSnap = await getDocs(collection(db, "recipes"));
-
-	return new Promise((resolve, reject) => {
-		if (recipesSnap.empty) reject("No data");
-		const userRecipes = [];
-
-		recipesSnap.forEach(doc => {
-			const recipe = doc.data();
-			const id = doc.id;
-
-			if (userId === recipe.author) {
-				const recipeObject = {
-					id: id,
-					...recipe,
-				};
-
-				getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
-					recipeObject.tags = tagsArr;
-				});
-
-				userRecipes.push(recipeObject);
-			}
-		});
-
-		resolve(userRecipes);
-	});
-};
-
-export const getAllUserFavoriteRecpies = async userId => {
-	const userSnap = await getDoc(doc(db, "users", userId));
-	const recipesSnap = await getDocs(collection(db, "recipes"));
-	const favoriteRecipesId = userSnap.data().favoriteRecipes;
-
-	return new Promise((resolve, reject) => {
-		if (recipesSnap.empty) reject("No data");
-		const userFavoriteRecipes = [];
-
-		recipesSnap.forEach(doc => {
-			const recipe = doc.data();
-			const recipeId = doc.id;
-			if (favoriteRecipesId.includes(recipeId)) {
-				const recipeObject = {
-					id: recipeId,
-					...recipe,
-				};
-
-				getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
-					recipeObject.tags = tagsArr;
-				});
-
-				userFavoriteRecipes.push(recipeObject);
-			}
-		});
-		resolve(userFavoriteRecipes);
 	});
 };
 
