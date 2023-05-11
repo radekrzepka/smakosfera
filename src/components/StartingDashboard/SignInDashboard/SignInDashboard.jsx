@@ -81,44 +81,69 @@ const SignInDashboard = () => {
 	};
 
 	return (
-		<form className="text-emerald-5 col-span-2 row-start-2 m-5 mx-6 h-max rounded-xl bg-[#2A6F2B] p-3 text-emerald-100 md:col-start-2 md:ml-0 lg:mr-14">
-			<p className="mb-3 text-2xl">Dołącz do smakosfery</p>
-			<div className="w-full">
-				<label htmlFor="signInEmail">Podaj e-mail:</label>
-				<input
-					className="mb-3 w-full rounded bg-emerald-50 text-black"
-					type="text"
-					id="signInEmail"
-					onChange={event =>
-						dispatchEmail({ type: "changeValue", value: event.target.value })
-					}
-				/>
-			</div>
-			<div>
-				<label htmlFor="signInPassword">Podaj hasło (minimum 6 znaków):</label>
-				<input
-					className="w-full rounded bg-emerald-50 text-black"
-					type="password"
-					id="signInPassword"
-					onChange={event =>
-						dispatchPassword({ type: "changeValue", value: event.target.value })
-					}
-				/>
-			</div>
-			<button
-				type="button"
-				className={`mt-5 rounded border border-emerald-900 p-3 ${
-					isDisabled
-						? "border-[#afc2ab] bg-[#afc2ab] text-black"
-						: "border-emerald-900 bg-emerald-900 text-emerald-50"
-				}`}
-				onClick={submitHandler}
-				disabled={isDisabled}
-			>
-				Zarejestruj się
-			</button>
-			{isDisabled && firstTimeClickedButton && <p>{errorMessage}</p>}
-		</form>
+		<div className="text-emerald-5 col-span-2 row-start-2 m-5 mx-6 md:col-start-2 md:ml-0 lg:mr-14">
+			<form className="  h-max rounded-xl bg-emerald-50 p-3 text-emerald-900 ">
+				<h3 className="mb-3 text-2xl">Dołącz do smakosfery</h3>
+				<div className="mb-4 w-full">
+					<label htmlFor="signInEmail">Podaj e-mail:</label>
+					<input
+						className="mb-3 w-full rounded border border-emerald-900 bg-emerald-50 text-black"
+						type="text"
+						id="signInEmail"
+						onChange={event =>
+							dispatchEmail({ type: "changeValue", value: event.target.value })
+						}
+					/>
+				</div>
+				<div className="mb-4 w-full">
+					<label htmlFor="signInPassword">
+						Podaj hasło (minimum 6 znaków):
+					</label>
+					<input
+						className="w-full rounded border border-emerald-900 bg-emerald-50 text-black"
+						type="password"
+						id="signInPassword"
+						onChange={event =>
+							dispatchPassword({
+								type: "changeValue",
+								value: event.target.value,
+							})
+						}
+					/>
+				</div>
+				<button
+					type="button"
+					className={`mt-5 w-max rounded border border-emerald-900 p-3 ${
+						isDisabled
+							? "border-[#afc2ab] bg-[#afc2ab] text-black"
+							: "border-emerald-900 bg-emerald-900 text-emerald-50"
+					}`}
+					onClick={submitHandler}
+					disabled={isDisabled}
+				>
+					Zarejestruj się
+				</button>
+				{isDisabled && firstTimeClickedButton && <p>{errorMessage}</p>}
+			</form>
+			<p className="mb-3 text-emerald-50">
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. A vero dolorum
+				laboriosam tempora asperiores sunt iusto dolore iure beatae. Animi
+				nulla, dolorum non esse, quas, amet ipsam vitae quibusdam rem iure at
+				quod laboriosam debitis dolorem facilis dicta delectus repudiandae aut
+				illo! Aperiam beatae commodi fuga nemo soluta possimus iusto.
+			</p>
+			<p className="mb-3 text-emerald-50">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium
+				illo sequi tempora aspernatur quia quod voluptate aut, iure nesciunt quo
+				adipisci officiis quibusdam aliquam facere voluptates libero! Illo
+				accusantium, iste officia aspernatur, quibusdam nesciunt sapiente
+				facilis et incidunt neque id totam ad beatae? Reprehenderit delectus
+				dolor ex optio debitis accusantium ab doloribus voluptate neque
+				veritatis, mollitia laudantium necessitatibus repudiandae, vel facilis
+				ea, quod corrupti voluptas impedit voluptates. Beatae officiis fuga
+				aliquam non a ratione autem?
+			</p>
+		</div>
 	);
 };
 

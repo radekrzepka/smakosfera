@@ -7,7 +7,7 @@ const MainDashboard = () => {
 	const [selectedSite, setSelectedSite] = useState("home");
 
 	return (
-		<main>
+		<main className="grid grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
 			<SidePanel
 				selectedSite={selectedSite}
 				setSelectedSite={setSelectedSite}

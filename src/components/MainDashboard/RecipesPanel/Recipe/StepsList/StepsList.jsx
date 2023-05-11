@@ -1,9 +1,11 @@
 const StepsList = props => {
 	const stepsList = props.list.map((step, index) => (
-		<li key={index}>{step}</li>
+		<li className="" key={index}>
+			{step}
+		</li>
 	));
 
-	return <ul>{stepsList}</ul>;
+	return <ol className="list-inside list-decimal">{stepsList}</ol>;
 };
 
 export default StepsList;

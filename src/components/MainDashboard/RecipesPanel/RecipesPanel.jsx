@@ -13,14 +13,14 @@ const RecipesPanel = props => {
 		const userRecipes = recipesCtx.allRecipes.filter(
 			recipe => recipe.author === authCtx.userData.uid
 		);
+
 		const userFavoriteRecipes = recipesCtx.allRecipes.filter(recipe =>
 			recipe.usersFavorites.includes(authCtx.userData.uid)
 		);
+
 		switch (props.selectedSite) {
 			case "home":
 				setRecipes(recipesCtx.allRecipes);
-				break;
-			case "search":
 				break;
 			case "myRecipes":
 				setRecipes(userRecipes);
@@ -29,14 +29,14 @@ const RecipesPanel = props => {
 				setRecipes(userFavoriteRecipes);
 				break;
 		}
-	}, [props.selectedSite, recipesCtx.allRecipes]);
+	}, [authCtx.userData.uid, props.selectedSite, recipesCtx.allRecipes]);
 
 	if (recipes !== undefined) {
 		const recipesList = recipes.map(recipe => (
 			<Recipe key={recipe.id} recipe={recipe}></Recipe>
 		));
 
-		return <div>{recipesList}</div>;
+		return <div className="mx-3 grid justify-items-center">{recipesList}</div>;
 	} else {
 		return <LoadingScreen></LoadingScreen>;
 	}

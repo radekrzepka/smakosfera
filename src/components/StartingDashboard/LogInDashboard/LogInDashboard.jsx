@@ -70,7 +70,7 @@ const LogInDashboard = () => {
 	};
 
 	return (
-		<form className="col-span-2 row-span-1 mx-6 mb-4 flex h-max flex-col items-center justify-evenly rounded-b-lg bg-emerald-50 p-2 md:flex-row lg:mx-14">
+		<form className="relative col-span-2 row-span-1 mx-6 mb-4 flex h-max flex-col items-center justify-evenly rounded-b-lg bg-emerald-50 p-2 md:flex-row lg:mx-14">
 			<h1 className="font-JetBrainsMono text-2xl font-bold text-emerald-900">
 				Smakosfera
 			</h1>
@@ -109,7 +109,7 @@ const LogInDashboard = () => {
 				</button>
 				{!(emailState.isValid && passwordState.isValid) &&
 					firstTimeClickedButton && (
-						<p className="text-xs md:absolute md:top-3/4">
+						<p className="text-xs md:absolute md:top-[80%] xl:top-3/4">
 							Podaj poprawne dane do logowania
 						</p>
 					)}

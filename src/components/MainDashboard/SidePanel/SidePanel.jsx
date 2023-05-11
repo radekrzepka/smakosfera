@@ -2,6 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import LogOutButton from "./LogOutButton/LogOutButton";
 import { AuthContext } from "../../../context/auth-context";
 import { getUserUsernameByGivenId } from "../../../services/databaseServices";
+import LoadingScreen from "../../LoadingScreen/LoadingScreen";
+import Button from "./Button/Button";
+
+import forkIcon from "./../../../assets/fork_icon.png";
+import heartIcon from "./../../../assets/heart_icon.png";
+import homeIcon from "./../../../assets/home_icon.png";
+import addIcon from "./../../../assets/home_icon.png";
 
 const SidePanel = props => {
 	const [userName, setUserName] = useState("");
@@ -17,18 +24,35 @@ const SidePanel = props => {
 
 	if (isLoaded) {
 		return (
-			<div>
-				<p>Witaj {userName} w smakosfera</p>
-				<div onClick={() => props.setSelectedSite("home")}>dom</div>
-				<div onClick={() => props.setSelectedSite("myRecipes")}>
-					moje przepisy
-				</div>
-				<div onClick={() => props.setSelectedSite("favorite")}>ulubione</div>
-				<div>dodaj przepis</div>
-				<div>szukaj</div>
-				<LogOutButton></LogOutButton>
+			<div className="bg-emerald-900 lg:min-h-screen">
+				<nav className=" m-3 flex h-max flex-col rounded bg-emerald-50">
+					<p className="my-5 ml-6 text-2xl">Witaj {userName}</p>
+					<Button
+						text="Dom"
+						site="home"
+						setSelectedSite={props.setSelectedSite}
+						icon={homeIcon}
+					/>
+					<Button
+						text="Moje przepisy"
+						site="myRecipes"
+						icon={forkIcon}
+						setSelectedSite={props.setSelectedSite}
+					/>
+					<Button
+						text="Ulubione"
+						site="favorite"
+						icon={heartIcon}
+						setSelectedSite={props.setSelectedSite}
+					/>
+
+					<Button text="Dodaj przepis" icon={addIcon} />
+					<LogOutButton></LogOutButton>
+				</nav>
 			</div>
 		);
+	} else {
+		return <LoadingScreen></LoadingScreen>;
 	}
 };
 

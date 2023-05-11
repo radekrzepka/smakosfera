@@ -9,7 +9,9 @@ export const RecipesContextProvider = props => {
 	const [allRecipes, setAllRecipes] = useState([]);
 
 	useEffect(() => {
-		getAllRecipes().then(data => setAllRecipes(data));
+		getAllRecipes().then(data =>
+			setAllRecipes(data.sort((a, b) => b.addDate.seconds - a.addDate.seconds))
+		);
 	}, []);
 
 	return (

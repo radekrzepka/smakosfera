@@ -10,7 +10,12 @@ const LogOutButton = () => {
 
 	return (
 		<div>
-			<button onClick={logOutHandler}>Wyloguj się</button>
+			<button
+				className="m-3 rounded bg-emerald-900 px-8 py-1 text-emerald-50"
+				onClick={logOutHandler}
+			>
+				Wyloguj się
+			</button>
 		</div>
 	);
 };
