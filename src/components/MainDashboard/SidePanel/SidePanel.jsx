@@ -20,7 +20,7 @@ const SidePanel = props => {
 			setUserName(data);
 			setIsLoaded(true);
 		});
-	}, [authCtx.userData.uid]);
+	}, [authCtx.userData.uid, props.userHasUsername]);
 
 	if (isLoaded) {
 		return (

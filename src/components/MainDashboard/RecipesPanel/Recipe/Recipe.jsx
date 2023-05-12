@@ -34,9 +34,9 @@ const Recipe = props => {
 					src={imageUrl}
 					alt={`Zdjęcie przedstawiające ${props.recipe.name}`}
 				></img>
-				<p className="m-2 text-xl">Lista składników:</p>
+				<p className="my-3 text-xl">Lista składników:</p>
 				<IngredientsList list={props.recipe.ingredients}></IngredientsList>
-				<p className="mt-3 text-xl">Jak przyrządzić:</p>
+				<p className="my-3 text-xl">Jak przyrządzić:</p>
 				<StepsList list={props.recipe.steps}></StepsList>
 			</div>
 		);
