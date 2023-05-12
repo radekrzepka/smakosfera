@@ -1,9 +1,57 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+import {
+	getFirestore,
+	getDocs,
+	collection,
+	doc,
+	updateDoc,
+} from "firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+export const checkIfTheUserHasUsername = async userId => {
+	const usersSnap = await getDocs(collection(db, "users"));
+
+	return new Promise((resolve, reject) => {
+		if (usersSnap.empty) reject("No data");
+
+		usersSnap.forEach(doc => {
+			const name = doc.data().userName;
+			const id = doc.id;
+			if (userId === id) {
+				if (name !== "") resolve(true);
+				resolve(false);
+			}
+		});
+	});
+};
+
+export const checkIfUserNameInDb = async givenUserName => {
+	const usersSnap = await getDocs(collection(db, "users"));
+
+	return new Promise((resolve, reject) => {
+		if (usersSnap.empty) reject("No data");
+
+		usersSnap.forEach(doc => {
+			const username = doc.data().userName;
+			if (givenUserName === username) {
+				resolve(true);
+			}
+		});
+
+		resolve(false);
+	});
+};
+
+export const changeUsername = async (userId, newUsername) => {
+	const userRef = doc(db, "users", userId);
+
+	await updateDoc(userRef, {
+		userName: newUsername,
+	});
+};
 
 export const getUserUsernameByGivenId = async userId => {
 	const usersSnap = await getDocs(collection(db, "users"));

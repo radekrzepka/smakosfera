@@ -81,9 +81,11 @@ const SignInDashboard = () => {
 	};
 
 	return (
-		<div className="text-emerald-5 col-span-2 row-start-2 m-5 mx-6 md:col-start-2 md:ml-0 lg:mr-14">
-			<form className="  h-max rounded-xl bg-emerald-50 p-3 text-emerald-900 ">
-				<h3 className="mb-3 text-2xl">Dołącz do smakosfery</h3>
+		<div className="text-emerald-5 col-span-2 row-start-3 m-5 mx-6 md:col-start-2 md:row-start-2 md:ml-0 lg:mr-14">
+			<form className="h-max rounded-xl bg-emerald-50 p-3 text-emerald-900 ">
+				<h3 className="mb-3 text-center text-2xl font-bold">
+					Dołącz do smakosfery
+				</h3>
 				<div className="mb-4 w-full">
 					<label htmlFor="signInEmail">Podaj e-mail:</label>
 					<input
@@ -125,7 +127,7 @@ const SignInDashboard = () => {
 				</button>
 				{isDisabled && firstTimeClickedButton && <p>{errorMessage}</p>}
 			</form>
-			<p className="mb-3 text-emerald-50">
+			<p className="mb-3 mt-6 text-emerald-50">
 				Lorem ipsum dolor sit, amet consectetur adipisicing elit. A vero dolorum
 				laboriosam tempora asperiores sunt iusto dolore iure beatae. Animi
 				nulla, dolorum non esse, quas, amet ipsam vitae quibusdam rem iure at

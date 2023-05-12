@@ -11,6 +11,9 @@ const RecipesPanel = props => {
 
 	useEffect(() => {
 		switch (props.selectedSite) {
+			case "none":
+				setRecipes([]);
+				break;
 			case "home":
 				setRecipes(recipesCtx.allRecipes);
 				break;
