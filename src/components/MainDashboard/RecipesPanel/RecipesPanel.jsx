@@ -34,7 +34,11 @@ const RecipesPanel = props => {
 			<Recipe key={`${recipe.id} ${Date.now()}`} recipe={recipe}></Recipe>
 		));
 
-		return <div className="mx-3 grid justify-items-center">{recipesList}</div>;
+		return (
+			<div className="mx-3 grid min-h-screen justify-items-center bg-emerald-900">
+				{recipesList}
+			</div>
+		);
 	} else {
 		return <LoadingScreen></LoadingScreen>;
 	}
