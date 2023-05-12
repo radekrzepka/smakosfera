@@ -8,7 +8,7 @@ import Button from "./Button/Button";
 import forkIcon from "./../../../assets/fork_icon.png";
 import heartIcon from "./../../../assets/heart_icon.png";
 import homeIcon from "./../../../assets/home_icon.png";
-import addIcon from "./../../../assets/home_icon.png";
+import addIcon from "./../../../assets/add_icon.png";
 
 const SidePanel = props => {
 	const [userName, setUserName] = useState("");
@@ -20,7 +20,7 @@ const SidePanel = props => {
 			setUserName(data);
 			setIsLoaded(true);
 		});
-	}, []);
+	}, [authCtx.userData.uid]);
 
 	if (isLoaded) {
 		return (

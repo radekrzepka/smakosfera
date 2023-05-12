@@ -10,30 +10,28 @@ const RecipesPanel = props => {
 	const recipesCtx = useContext(RecipesContext);
 
 	useEffect(() => {
-		const userRecipes = recipesCtx.allRecipes.filter(
-			recipe => recipe.author === authCtx.userData.uid
-		);
-
-		const userFavoriteRecipes = recipesCtx.allRecipes.filter(recipe =>
-			recipe.usersFavorites.includes(authCtx.userData.uid)
-		);
-
 		switch (props.selectedSite) {
 			case "home":
 				setRecipes(recipesCtx.allRecipes);
 				break;
 			case "myRecipes":
-				setRecipes(userRecipes);
+				setRecipes(recipesCtx.userRecipes);
 				break;
 			case "favorite":
-				setRecipes(userFavoriteRecipes);
+				setRecipes(recipesCtx.userFavoriteRecipes);
 				break;
 		}
-	}, [authCtx.userData.uid, props.selectedSite, recipesCtx.allRecipes]);
+	}, [
+		authCtx.userData.uid,
+		props.selectedSite,
+		recipesCtx.allRecipes,
+		recipesCtx.userFavoriteRecipes,
+		recipesCtx.userRecipes,
+	]);
 
 	if (recipes !== undefined) {
 		const recipesList = recipes.map(recipe => (
-			<Recipe key={recipe.id} recipe={recipe}></Recipe>
+			<Recipe key={`${recipe.id} ${Date.now()}`} recipe={recipe}></Recipe>
 		));
 
 		return <div className="mx-3 grid justify-items-center">{recipesList}</div>;

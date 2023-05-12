@@ -21,7 +21,6 @@ export const createUser = async (email, password) => {
 				setDoc(doc(db, "users", uid), {
 					userName: "",
 					email: email,
-					favoriteRecipes: [],
 				});
 				resolve({ uid: uid, email: email });
 			})
