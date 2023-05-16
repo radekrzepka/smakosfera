@@ -2,11 +2,12 @@
 
 # Smakosfera
 
-An application to which you can add your recipes, view others added by other users and add them to your favorites.
+An application where you can add your recipes, view others added by other users and add them to your favorites.
 
 ## Login details for testing
 
 email: test@gmail.com
+
 hasło: qwerty
 
 ## Technologies

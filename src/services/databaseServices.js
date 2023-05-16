@@ -123,6 +123,27 @@ export const getTagsNameArrayFromTagsIdArray = async tagsIdArray => {
 	);
 };
 
+export const getAllTags = async () => {
+	const tagsSnap = await getDocs(collection(db, "recipesTags"));
+
+	return new Promise((resolve, reject) => {
+		if (tagsSnap.empty) reject("No data");
+		const tags = [];
+
+		tagsSnap.forEach(doc => {
+			const tagName = doc.data().name;
+			const id = doc.id;
+
+			tags.push({
+				id: id,
+				name: tagName,
+			});
+		});
+
+		resolve(tags);
+	});
+};
+
 export const addNewRecipe = async (recipe, file) => {
 	const newRef = doc(collection(db, "recipes"));
 
