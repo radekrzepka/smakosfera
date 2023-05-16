@@ -132,7 +132,7 @@ const AddRecipeModal = props => {
 					className="absolute right-0 top-0 w-8 cursor-pointer"
 					onClick={props.closeModalHandler}
 				/>
-				<p className="mb-3">Dodaj swój nowy przepis (maks 20 znaków)</p>
+				<p className="mb-3">Dodaj swój nowy przepis</p>
 				<label htmlFor="name">Podaj nazwę dania:</label>
 				<input
 					className="w-3/4 rounded border border-emerald-900"

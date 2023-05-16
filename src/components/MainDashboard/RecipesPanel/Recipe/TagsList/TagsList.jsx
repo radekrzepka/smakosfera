@@ -5,7 +5,7 @@ const TagsList = props => {
 		<Tag key={tag.tagId}>{tag.tagName}</Tag>
 	));
 
-	return <ul className="flex">{tagList}</ul>;
+	return <ul className="mb-3 flex flex-wrap justify-center">{tagList}</ul>;
 };
 
 export default TagsList;
