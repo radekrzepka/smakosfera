@@ -5,8 +5,10 @@ import {
 	collection,
 	doc,
 	updateDoc,
+	setDoc,
 } from "firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
+import { addNewImage } from "./storeServices";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -119,4 +121,12 @@ export const getTagsNameArrayFromTagsIdArray = async tagsIdArray => {
 			};
 		})
 	);
+};
+
+export const addNewRecipe = async (recipe, file) => {
+	const newRef = doc(collection(db, "recipes"));
+
+	addNewImage({ name: `${newRef.id}.jpg`, file: file });
+
+	await setDoc(newRef, recipe);
 };

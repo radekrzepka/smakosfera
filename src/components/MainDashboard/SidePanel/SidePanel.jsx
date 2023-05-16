@@ -46,7 +46,7 @@ const SidePanel = props => {
 						setSelectedSite={props.setSelectedSite}
 					/>
 
-					<Button text="Dodaj przepis" icon={addIcon} />
+					<Button text="Dodaj przepis" icon={addIcon} addRecipe={true} />
 					<LogOutButton></LogOutButton>
 				</nav>
 			</div>

@@ -1,4 +1,9 @@
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import {
+	getStorage,
+	ref,
+	getDownloadURL,
+	uploadBytesResumable,
+} from "firebase/storage";
 
 const storage = getStorage();
 
@@ -12,4 +17,9 @@ export const getImageByRecipeId = async recipeId => {
 				reject(error);
 			});
 	});
+};
+
+export const addNewImage = async file => {
+	const storageRef = ref(storage, `/recipesImages/${file.name}`);
+	uploadBytesResumable(storageRef, file.file);
 };
