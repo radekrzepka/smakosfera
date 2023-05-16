@@ -1,8 +1,8 @@
 import { useReducer, useState, useContext } from "react";
 import Input from "./Input/Input";
-import addInputIcon from "./../../../../assets/add_input_icon.png";
-import minusInputIcon from "./../../../../assets/minus_input_icon.png";
-import closeIcon from "./../../../../assets/close_icon.png";
+import addInputIcon from "../../../../assets/add_input_icon.png";
+import minusInputIcon from "../../../../assets/minus_input_icon.png";
+import closeIcon from "../../../../assets/close_icon.png";
 import {
 	addNewRecipe,
 	getAllTags,
