@@ -1,7 +1,7 @@
 import LogInDashboard from "./LogInDashboard/LogInDashboard";
 import SignInDashboard from "./SignInDashboard/SignInDashboard";
 
-import photo from "../../assets/starting_dashboard_photo.jpg";
+import photo from "./../../assets/starting_dashboard_photo.jpg";
 
 const StartingDashboard = () => {
 	return (
