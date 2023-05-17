@@ -78,6 +78,7 @@ const AddRecipeModal = props => {
 
 		const recipe = {
 			author: authCtx.userData.uid,
+			approved: false,
 			addDate: new Date(),
 			ingredients: ingridents,
 			name: recipeName,

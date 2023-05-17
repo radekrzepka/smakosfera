@@ -93,19 +93,21 @@ export const getAllRecipes = async () => {
 		const recipes = [];
 
 		recipesSnap.forEach(doc => {
-			const recipe = doc.data();
-			const id = doc.id;
+			if (doc.data().approved) {
+				const recipe = doc.data();
+				const id = doc.id;
 
-			const recipeObject = {
-				id: id,
-				...recipe,
-			};
+				const recipeObject = {
+					id: id,
+					...recipe,
+				};
 
-			getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
-				recipeObject.tags = tagsArr;
-			});
+				getTagsNameArrayFromTagsIdArray(recipe.tags).then(tagsArr => {
+					recipeObject.tags = tagsArr;
+				});
 
-			recipes.push(recipeObject);
+				recipes.push(recipeObject);
+			}
 		});
 		resolve(recipes);
 	});
