@@ -34,7 +34,7 @@ const RecipesPanel = props => {
 
 	if (recipes !== undefined) {
 		const recipesList = recipes.map(recipe => (
-			<Recipe key={`${recipe.id} ${Date.now()}`} recipe={recipe}></Recipe>
+			<Recipe key={`${recipe.id}`} recipe={recipe}></Recipe>
 		));
 
 		return (

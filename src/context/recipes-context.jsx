@@ -38,11 +38,8 @@ export const RecipesContextProvider = props => {
 				recipe.usersFavorites.includes(authCtx.userData.uid)
 			);
 
-			console.log(tagsList);
-
 			if (tagsList && tagsList.length !== 0) {
 				const test = filterRecipeListByTags(sortedData, tagsList);
-				console.log(sortedData);
 				setAllRecipes(test);
 				setUserRecipes(filterRecipeListByTags(userRecipes, tagsList));
 				setUserFavoriteRecipes(

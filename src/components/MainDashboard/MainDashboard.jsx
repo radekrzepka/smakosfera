@@ -5,6 +5,7 @@ import { RecipesContextProvider } from "../../context/recipes-context";
 import { checkIfTheUserHasUsername } from "../../services/databaseServices";
 import UsernameModal from "./UsernameModal/UsernameModal";
 import { AuthContext } from "../../context/auth-context";
+import { TagsContextProvider } from "../../context/tags-context";
 
 const MainDashboard = () => {
 	const [selectedSite, setSelectedSite] = useState("home");
@@ -23,26 +24,28 @@ const MainDashboard = () => {
 	});
 
 	return (
-		<RecipesContextProvider>
-			<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
-				{!userHasUsername && (
-					<UsernameModal
-						setUserHasUsername={setUserHasUsername}
+		<TagsContextProvider>
+			<RecipesContextProvider>
+				<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
+					{!userHasUsername && (
+						<UsernameModal
+							setUserHasUsername={setUserHasUsername}
+							setSelectedSite={setSelectedSite}
+						></UsernameModal>
+					)}
+					<SidePanel
+						userHasUsername={userHasUsername}
+						selectedSite={selectedSite}
 						setSelectedSite={setSelectedSite}
-					></UsernameModal>
-				)}
-				<SidePanel
-					userHasUsername={userHasUsername}
-					selectedSite={selectedSite}
-					setSelectedSite={setSelectedSite}
-				></SidePanel>
+					></SidePanel>
 
-				<RecipesPanel
-					selectedSite={selectedSite}
-					setSelectedSite={setSelectedSite}
-				></RecipesPanel>
-			</main>
-		</RecipesContextProvider>
+					<RecipesPanel
+						selectedSite={selectedSite}
+						setSelectedSite={setSelectedSite}
+					></RecipesPanel>
+				</main>
+			</RecipesContextProvider>
+		</TagsContextProvider>
 	);
 };
 

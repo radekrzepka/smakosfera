@@ -6,6 +6,7 @@ import {
 	doc,
 	updateDoc,
 	setDoc,
+	runTransaction,
 } from "firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
 import { addNewImage } from "./storeServices";
@@ -152,4 +153,26 @@ export const addNewRecipe = async (recipe, file) => {
 	addNewImage({ name: `${newRef.id}.jpg`, file: file });
 
 	await setDoc(newRef, recipe);
+};
+
+export const toggleUserInUsersFavorites = async (recipeId, userId) => {
+	const recipeRef = doc(collection(db, "recipes"), recipeId);
+
+	try {
+		await runTransaction(db, async transaction => {
+			const doc = await transaction.get(recipeRef);
+			const newUsersFavorites = doc.data().usersFavorites || [];
+
+			if (newUsersFavorites.includes(userId)) {
+				const index = newUsersFavorites.indexOf(userId);
+				newUsersFavorites.splice(index, 1);
+			} else {
+				newUsersFavorites.push(userId);
+			}
+
+			transaction.update(recipeRef, { usersFavorites: newUsersFavorites });
+		});
+	} catch (error) {
+		console.log("Transaction failed: ", error);
+	}
 };

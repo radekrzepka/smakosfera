@@ -5,6 +5,7 @@ import IngredientsList from "./IngredientsList/IngredientsList";
 import StepsList from "./StepsList/StepsList";
 import AddDate from "./AddDate/AddDate";
 import { getImageByRecipeId } from "../../../../services/storeServices";
+import LikeIcon from "./LikeIcon/LikeIcon";
 
 const Recipe = props => {
 	const [authorName, setAuthorName] = useState(undefined);
@@ -25,7 +26,8 @@ const Recipe = props => {
 				<h3 className="text-4xl">{props.recipe.name}</h3>
 				<p>
 					<AddDate date={props.recipe.addDate.seconds}></AddDate>
-					<span className="text-xs text-gray-600">• {authorName}</span>
+					<span className="text-xs text-gray-600">• {authorName} • </span>
+					<LikeIcon recipe={props.recipe}></LikeIcon>
 				</p>
 
 				<TagsList list={props.recipe.tags}></TagsList>
