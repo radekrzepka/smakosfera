@@ -11,7 +11,7 @@ const LogOutButton = () => {
 	return (
 		<div>
 			<button
-				className="m-3 rounded bg-emerald-900 px-8 py-1 text-emerald-50"
+				className="m-4 rounded bg-emerald-900 px-8 py-1 text-emerald-50"
 				onClick={logOutHandler}
 			>
 				Wyloguj się

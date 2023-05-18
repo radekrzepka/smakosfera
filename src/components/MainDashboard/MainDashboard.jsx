@@ -23,25 +23,26 @@ const MainDashboard = () => {
 	});
 
 	return (
-		<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
-			{!userHasUsername && (
-				<UsernameModal
-					setUserHasUsername={setUserHasUsername}
+		<RecipesContextProvider>
+			<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
+				{!userHasUsername && (
+					<UsernameModal
+						setUserHasUsername={setUserHasUsername}
+						setSelectedSite={setSelectedSite}
+					></UsernameModal>
+				)}
+				<SidePanel
+					userHasUsername={userHasUsername}
+					selectedSite={selectedSite}
 					setSelectedSite={setSelectedSite}
-				></UsernameModal>
-			)}
-			<SidePanel
-				userHasUsername={userHasUsername}
-				selectedSite={selectedSite}
-				setSelectedSite={setSelectedSite}
-			></SidePanel>
-			<RecipesContextProvider>
+				></SidePanel>
+
 				<RecipesPanel
 					selectedSite={selectedSite}
 					setSelectedSite={setSelectedSite}
 				></RecipesPanel>
-			</RecipesContextProvider>
-		</main>
+			</main>
+		</RecipesContextProvider>
 	);
 };
 

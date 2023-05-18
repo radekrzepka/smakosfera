@@ -16,7 +16,15 @@ export const RecipesContextProvider = props => {
 
 	const authCtx = useContext(AuthContext);
 
-	const setRecipes = () => {
+	const filterRecipeListByTags = (recipeList, tagsList) => {
+		const filteredRecipes = recipeList.filter(recipe => {
+			return tagsList.every(tag => recipe.tags.includes(tag));
+		});
+
+		return filteredRecipes;
+	};
+
+	const setRecipes = (tagsList = null) => {
 		getAllRecipes().then(data => {
 			const sortedData = data.sort(
 				(a, b) => b.addDate.seconds - a.addDate.seconds
@@ -30,9 +38,21 @@ export const RecipesContextProvider = props => {
 				recipe.usersFavorites.includes(authCtx.userData.uid)
 			);
 
-			setAllRecipes(sortedData);
-			setUserRecipes(userRecipes);
-			setUserFavoriteRecipes(userFavoriteRecipes);
+			console.log(tagsList);
+
+			if (tagsList && tagsList.length !== 0) {
+				const test = filterRecipeListByTags(sortedData, tagsList);
+				console.log(sortedData);
+				setAllRecipes(test);
+				setUserRecipes(filterRecipeListByTags(userRecipes, tagsList));
+				setUserFavoriteRecipes(
+					filterRecipeListByTags(userFavoriteRecipes, tagsList)
+				);
+			} else {
+				setAllRecipes(sortedData);
+				setUserRecipes(userRecipes);
+				setUserFavoriteRecipes(userFavoriteRecipes);
+			}
 		});
 	};
 
@@ -46,6 +66,7 @@ export const RecipesContextProvider = props => {
 				allRecipes: allRecipes,
 				userRecipes: userRecipes,
 				userFavoriteRecipes: userFavoriteRecipes,
+				setRecipes: setRecipes,
 			}}
 		>
 			{props.children}

@@ -9,6 +9,7 @@ import forkIcon from "../../../assets/fork_icon.png";
 import heartIcon from "../../../assets/heart_icon.png";
 import homeIcon from "../../../assets/home_icon.png";
 import addIcon from "../../../assets/add_icon.png";
+import TagsFilter from "./TagsFilter/TagsFilter";
 
 const SidePanel = props => {
 	const [userName, setUserName] = useState("");
@@ -47,6 +48,7 @@ const SidePanel = props => {
 					/>
 
 					<Button text="Dodaj przepis" icon={addIcon} addRecipe={true} />
+					<TagsFilter></TagsFilter>
 					<LogOutButton></LogOutButton>
 				</nav>
 			</div>
