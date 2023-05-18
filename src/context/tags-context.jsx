@@ -38,9 +38,7 @@ export const TagsContextProvider = props => {
 			});
 
 			const idTagsArray = tags.filter(tag => tag.isChosen).map(tag => tag.id);
-
 			setTagsIdArray(idTagsArray);
-
 			recipeCtx.setRecipes(idTagsArray);
 
 			return tags;

@@ -33,18 +33,21 @@ const SidePanel = props => {
 						site="home"
 						setSelectedSite={props.setSelectedSite}
 						icon={homeIcon}
+						isClicked={props.selectedSite === "home"}
 					/>
 					<Button
 						text="Moje przepisy"
 						site="myRecipes"
 						icon={forkIcon}
 						setSelectedSite={props.setSelectedSite}
+						isClicked={props.selectedSite === "myRecipes"}
 					/>
 					<Button
 						text="Ulubione"
 						site="favorite"
 						icon={heartIcon}
 						setSelectedSite={props.setSelectedSite}
+						isClicked={props.selectedSite === "favorite"}
 					/>
 
 					<Button text="Dodaj przepis" icon={addIcon} addRecipe={true} />

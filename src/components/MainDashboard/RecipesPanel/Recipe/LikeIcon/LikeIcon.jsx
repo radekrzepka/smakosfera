@@ -15,8 +15,8 @@ const LikeIcon = ({ recipe }) => {
 
 	const clickHandler = () => {
 		toggleUserInUsersFavorites(recipe.id, authCtx.userData.uid)
-			.then(setIsLiked(prevState => !prevState))
-			.then(recipeCtx.setRecipes(tagsCtx.tagsIdArray));
+			.then(() => setIsLiked(prevState => !prevState))
+			.then(() => recipeCtx.setRecipes(tagsCtx.tagsIdArray));
 	};
 
 	useEffect(() => {

@@ -19,7 +19,9 @@ const Button = props => {
 
 	return (
 		<button
-			className="mx-3 my-5 flex cursor-pointer rounded border-b border-emerald-900 p-2 transition-all duration-300 hover:bg-emerald-100"
+			className={`mx-3 my-5 flex cursor-pointer rounded border-b border-emerald-900 p-2 transition-all duration-300 hover:bg-emerald-100 ${
+				props.isClicked ? "bg-emerald-100" : ""
+			}`}
 			onClick={onClickHandler}
 		>
 			{showAddRecipeModal &&

@@ -24,8 +24,8 @@ const MainDashboard = () => {
 	});
 
 	return (
-		<TagsContextProvider>
-			<RecipesContextProvider>
+		<RecipesContextProvider>
+			<TagsContextProvider>
 				<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
 					{!userHasUsername && (
 						<UsernameModal
@@ -44,8 +44,8 @@ const MainDashboard = () => {
 						setSelectedSite={setSelectedSite}
 					></RecipesPanel>
 				</main>
-			</RecipesContextProvider>
-		</TagsContextProvider>
+			</TagsContextProvider>
+		</RecipesContextProvider>
 	);
 };
 
