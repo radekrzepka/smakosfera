@@ -128,22 +128,26 @@ const SignInDashboard = () => {
 				{isDisabled && firstTimeClickedButton && <p>{errorMessage}</p>}
 			</form>
 			<p className="mb-3 mt-6 text-emerald-50">
-				Lorem ipsum dolor sit, amet consectetur adipisicing elit. A vero dolorum
-				laboriosam tempora asperiores sunt iusto dolore iure beatae. Animi
-				nulla, dolorum non esse, quas, amet ipsam vitae quibusdam rem iure at
-				quod laboriosam debitis dolorem facilis dicta delectus repudiandae aut
-				illo! Aperiam beatae commodi fuga nemo soluta possimus iusto.
+				Smakosfera jest portalem dla każdego, kto lubi gotować oraz dzielić się
+				swoimi pomysłami. Na portalu możesz:
 			</p>
+			<ol className="ml-3 mt-3 list-inside list-disc text-emerald-50">
+				<li className="mb-1">
+					Przeglądać przepisy dodane przez innych użytkowników
+				</li>
+				<li className="mb-1">Dodawać swoje przepisy</li>
+				<li className="mb-1">
+					Polubić wybrarane przepisy, aby swoje ulubione przepisy mieć w jednym
+					miejscu
+				</li>
+				<li className="mb-1">
+					Szukać przepisów, bo najrózniejszych tagach takich jak: dania
+					wegetrańskie, dania obiadowe, czy dania na szybko{" "}
+				</li>
+			</ol>
 			<p className="mb-3 text-emerald-50">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium
-				illo sequi tempora aspernatur quia quod voluptate aut, iure nesciunt quo
-				adipisci officiis quibusdam aliquam facere voluptates libero! Illo
-				accusantium, iste officia aspernatur, quibusdam nesciunt sapiente
-				facilis et incidunt neque id totam ad beatae? Reprehenderit delectus
-				dolor ex optio debitis accusantium ab doloribus voluptate neque
-				veritatis, mollitia laudantium necessitatibus repudiandae, vel facilis
-				ea, quod corrupti voluptas impedit voluptates. Beatae officiis fuga
-				aliquam non a ratione autem?
+				Aby dołączyć do smakosfery wystarczy stworzyć konto, wybrać swoja nazwę
+				użytkownika i gotowe!
 			</p>
 		</div>
 	);

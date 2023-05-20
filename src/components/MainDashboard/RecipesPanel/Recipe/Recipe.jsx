@@ -22,7 +22,7 @@ const Recipe = props => {
 
 	if (authorName !== undefined && imageUrl !== undefined) {
 		return (
-			<div className="m-3 grid h-max w-full place-items-center rounded bg-emerald-50 p-3 text-center lg:w-9/12">
+			<div className="m-3 grid h-max w-full place-items-center break-all rounded bg-emerald-50 p-3 text-center lg:w-9/12">
 				<h3 className="text-4xl">{props.recipe.name}</h3>
 				<p>
 					<AddDate date={props.recipe.addDate.seconds}></AddDate>

@@ -1,5 +1,3 @@
-# 🚧Work in progress🚧
-
 # Smakosfera
 
 An application where you can add your recipes, view others added by other users and add them to your favorites.

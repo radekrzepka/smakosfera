@@ -10,7 +10,7 @@ const StartingDashboard = () => {
 			<SignInDashboard></SignInDashboard>
 			<div className="col-span-2 ml-6 mt-5 flex flex-col md:col-span-1 md:row-start-2 lg:ml-16">
 				<h1 className="mb-3 text-5xl text-emerald-50">Witaj w smakosferze</h1>
-				<h2 className="text-xl text-emerald-50">
+				<h2 className="mb-3 text-xl text-emerald-50">
 					Twojej wirtualnej książce z przepisami
 				</h2>
 				<img
