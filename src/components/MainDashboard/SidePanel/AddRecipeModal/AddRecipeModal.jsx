@@ -64,9 +64,9 @@ const validForm = (recipe, file) => {
 	let validate = true;
 	const messages = [];
 
-	if (!(recipe.name.trim().length >= 1 && recipe.name.trim().length <= 30)) {
+	if (!(recipe.name.trim().length >= 1 && recipe.name.trim().length <= 60)) {
 		validate = false;
-		messages.push("Podaj poprawną nazwę dania");
+		messages.push("Podaj poprawnie nazwę dania (maks 60 znaków)");
 	}
 
 	if (recipe.ingredients.some(ingredient => ingredient.trim().length === 0)) {
@@ -200,7 +200,7 @@ const AddRecipeModal = props => {
 						onClick={props.closeModalHandler}
 					/>
 					<p className="mb-3 text-xl">Dodaj swój nowy przepis</p>
-					<label htmlFor="name">Podaj nazwę dania (maks 30 znaków):</label>
+					<label htmlFor="name">Podaj nazwę dania (maks 60 znaków):</label>
 					<input
 						className="w-3/4 rounded border border-emerald-900"
 						id="name"

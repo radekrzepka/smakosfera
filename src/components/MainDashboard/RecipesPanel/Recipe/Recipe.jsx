@@ -22,7 +22,7 @@ const Recipe = props => {
 
 	if (authorName !== undefined && imageUrl !== undefined) {
 		return (
-			<div className="m-3 grid h-max w-full place-items-center rounded bg-emerald-50 p-3 text-center lg:w-9/12">
+			<div className="m-3 grid h-max w-11/12 place-items-center rounded bg-emerald-50 p-3 text-center lg:w-10/12">
 				<h3 className="text-4xl">{props.recipe.name}</h3>
 				<p>
 					<AddDate date={props.recipe.addDate.seconds}></AddDate>
@@ -32,7 +32,7 @@ const Recipe = props => {
 
 				<TagsList list={props.recipe.tags}></TagsList>
 				<img
-					className=" w-8/12 object-cover"
+					className=" w-7/12 object-cover lg:w-5/12"
 					src={imageUrl}
 					alt={`Zdjęcie przedstawiające ${props.recipe.name}`}
 				></img>

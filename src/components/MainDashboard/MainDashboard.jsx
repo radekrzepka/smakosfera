@@ -26,7 +26,7 @@ const MainDashboard = () => {
 	return (
 		<RecipesContextProvider>
 			<TagsContextProvider>
-				<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[3fr_5fr]">
+				<main className="grid min-h-screen grid-cols-1 bg-emerald-900 lg:grid-cols-[1fr_3fr] xl:grid-cols-[1fr_4fr]">
 					{!userHasUsername && (
 						<UsernameModal
 							setUserHasUsername={setUserHasUsername}

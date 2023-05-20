@@ -1,6 +1,6 @@
 const StepsList = props => {
 	const stepsList = props.list.map((step, index) => (
-		<li className="mb-1" key={index}>
+		<li className="mb-3 text-left lg:mx-5" key={index}>
 			{step}
 		</li>
 	));
