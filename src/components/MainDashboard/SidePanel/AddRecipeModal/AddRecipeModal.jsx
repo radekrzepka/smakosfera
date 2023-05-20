@@ -60,7 +60,7 @@ const tagsReducer = (state, action) => {
 	}
 };
 
-const validForm = (recipe,file) => {
+const validForm = (recipe, file) => {
 	let validate = true;
 	const messages = [];
 
@@ -92,8 +92,8 @@ const validForm = (recipe,file) => {
 	return {
 		validate: validate,
 		errorMessages: messages,
-	}
-}
+	};
+};
 
 const AddRecipeModal = props => {
 	const [recipeName, setRecipeName] = useState("");
@@ -103,7 +103,7 @@ const AddRecipeModal = props => {
 	const [ingridents, dispatchIngridents] = useReducer(ingridentsReducer, [""]);
 	const [steps, dispatchSteps] = useReducer(stepsReducer, [""]);
 	const [tags, dispatchTags] = useReducer(tagsReducer, []);
-	
+
 	const authCtx = useContext(AuthContext);
 
 	const handleFileChange = event => {
@@ -123,20 +123,19 @@ const AddRecipeModal = props => {
 			usersFavorites: [],
 		};
 
-		const {validate, errorMessages} = validForm(recipe,file);
+		const { validate, errorMessages } = validForm(recipe, file);
 
 		if (validate) {
-			props.closeModalHandler(); 
+			props.closeModalHandler();
 
 			alert(
 				"Poprawnie dodano przepis do bazy, przepis będzie widoczny po zatwierdzeniu"
 			);
-	
+
 			addNewRecipe(recipe, file);
 		} else {
 			setErrorMeesages(errorMessages);
 		}
-
 	};
 
 	const ingridentsList = ingridents.map((ingrident, index) => (
@@ -158,7 +157,17 @@ const AddRecipeModal = props => {
 		});
 	}, [getAllTags, dispatchTags]);
 
-	const tagsList = tags.map((tag, index) => (
+	const sortCompare = (a, b) => {
+		if (a.name < b.name) {
+			return -1;
+		}
+		if (a.name > b.name) {
+			return 1;
+		}
+		return 0;
+	};
+
+	const tagsList = tags.sort(sortCompare).map((tag, index) => (
 		<Tag
 			key={tag.id}
 			isChosen={tag.isChosen}
@@ -171,8 +180,10 @@ const AddRecipeModal = props => {
 	));
 
 	const errorsList = errorMeesages.map((message, index) => (
-		<p className="text-red-500" key ={index}>{message} </p>
-	))
+		<p className="text-red-500" key={index}>
+			{message}{" "}
+		</p>
+	));
 
 	return (
 		<div className="fixed left-0 top-0 z-10 flex h-screen w-full items-center justify-center bg-black/60">
