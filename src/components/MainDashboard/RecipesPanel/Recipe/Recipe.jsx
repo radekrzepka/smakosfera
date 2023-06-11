@@ -32,7 +32,7 @@ const Recipe = props => {
 
 				<TagsList list={props.recipe.tags}></TagsList>
 				<img
-					className=" w-7/12 object-cover lg:w-5/12"
+					className="w-7/12 object-cover lg:w-3/12"
 					src={imageUrl}
 					alt={`Zdjęcie przedstawiające ${props.recipe.name}`}
 				></img>
